@@ -10,15 +10,16 @@ class SimpleReactFileUpload extends React.Component {
             file:null,
             message: '',
             shouldShowFirst: false,
-            shouldShowSecond: false
+            shouldShowSecond: false,
+            basic: ["", "", ""],
+            trained: ["", "", ""],
+            story: "",
+            status: "Waiting for input"
         }
         this.onFormSubmit = this.onFormSubmit.bind(this)
         this.onChange = this.onChange.bind(this)
-        this.fileUpload = this.fileUpload.bind(this)
-        this.firstProjectOnClick = this.firstProjectOnClick.bind(this)
-        this.secondProjectOnClick = this.secondProjectOnClick.bind(this)
         this.onTextareaChange = this.onTextareaChange.bind(this)
-        this.reviewUpload = this.reviewUpload.bind(this)
+        this.storiesUpload = this.storiesUpload.bind(this)
         this.onSecondFormSubmit = this.onSecondFormSubmit.bind(this)
     }
     onFormSubmit(e){
@@ -44,7 +45,7 @@ class SimpleReactFileUpload extends React.Component {
     onSecondFormSubmit(e){
 
         e.preventDefault() // Stop form submit
-        this.reviewUpload(this.state.review).then((response)=>{
+        this.storiesUpload(this.state.review).then((response)=>{
             // this.setState({
             //     message: 'Changed'
             // })
@@ -53,20 +54,30 @@ class SimpleReactFileUpload extends React.Component {
             //     message: response.data
             // })
             this.setState({
-                prob: response.data.prob
+                story: response.data.story,
+                basic: response.data.basic,
+                trained: response.data.trained,
+                status: "Recieved output"
+            }, () => {
+                console.log(this.state)
             })
+        }).catch((error) => {
+            console.log(error)
         })
     }
 
-    reviewUpload(review){
-        const url = 'http://3.121.177.114:5000/second/predict';
+    storiesUpload(review){
+        console.log("Submitting")
+        const url = 'http://127.0.0.1:5000/second/predict';
         const formData = new FormData();
-        formData.append('review',review)
-        // const config = {
-        //     headers: {
-        //         'content-type': 'multipart/form-data'
-        //     }
-        // }
+        formData.append('first_story',this.state.first_story)
+        formData.append('second_story',this.state.second_story)
+        formData.append('third_story',this.state.third_story)
+
+        this.setState({
+            status: "Loading"
+        })
+
         return  post(url, formData)
     }
 
@@ -74,95 +85,132 @@ class SimpleReactFileUpload extends React.Component {
         // this.setState({file:e.target.files[0]})
         console.log(e.target.value)
         this.setState({
-            review: e.target.value
+            [e.target.id]: e.target.value
+        }, ()=> {
+            console.log(this.state)
         })
     }
 
-    firstProjectOnClick() {
-        this.setState({
-            shouldShowFirst: true,
-            shouldShowSecond: false,
-            review: "",
-            prob: null
-        })
-    }
 
-    secondProjectOnClick() {
-        this.setState({
-            shouldShowFirst: false,
-            shouldShowSecond: true,
-            message: ''
-        })
-    }
-
-    fileUpload(file){
-        const url = 'http://3.121.177.114:5000/first/predict';
-        const formData = new FormData();
-        formData.append('image',file)
-        const config = {
-            headers: {
-                'content-type': 'multipart/form-data'
-            }
-        }
-        return  post(url, formData,config)
-    }
 
     render() {
         return (
 
             <div align="center">
-                <h1>DataRoot University Final Projects</h1>
+                <h1>DataRoot University Final Project</h1>
+                <h4>Note: Stories may take a lot time to be generated since backend is running on EC2 with a CPU</h4>
                 <br/>
+                <h3><b>Status: {this.state.status}</b></h3>
                 <br/>
-                <Button variant="primary" onClick={this.firstProjectOnClick}>First project</Button>
-                <br/>
-                <br/>
-                <br/>
-                <Button variant="primary" onClick={this.secondProjectOnClick}>Second project</Button>
-                <br/>
-                <br/>
-                {this.state.shouldShowFirst
-                    ?
-                    <div>
-                        <form onSubmit={this.onFormSubmit}>
-                            <h1>First Project: Sign Classification</h1>
-                            <h4>This project is dedicated to classifying hand signs from 0 to 5</h4>
-                            <h4>Take a photo of your palm showing sign from 0 to 5, upload the image and see the result of classification</h4>
-                            <br/>
-                            <h5>Note: background of your photo should be plain for the best performance of the model</h5>
-                            <br/>
-                            <input type="file" onChange={this.onChange} />
-                            <button type="submit">Upload</button>
-                        </form>
-                        <br/>
-                        <h5>You showed sign: {this.state.message}</h5>
-                    </div>
-                    :
-                    null
-                }
-
-                {this.state.shouldShowSecond
-                    ?
                     <div>
                         <form onSubmit={this.onSecondFormSubmit}>
-                            <h1>Second Project: Sentiment Analysis</h1>
-                            <h4>This project is dedicated to classifying movie reviews</h4>
-                            <h4>Write a review to a movie you recently watched and hit classify to see the result</h4>
+                            <div class = "row">
+                                <h4 className="col-xl-12">Input</h4>
+                                <label className="form-text col-xl-4">First story</label>
+                                <label className="form-text col-xl-4">Second story</label>
+                                <label className="form-text col-xl-4">Third story</label>
+                            </div>
+                            <div class="row">
+                                <textarea className="form-control col-xl-4"
+                                          id="first_story"
+                                          onChange={this.onTextareaChange}
+                                          rows="10">
+                                </textarea>
+                                <textarea className="form-control col-xl-4"
+                                          id="second_story"
+                                          onChange={this.onTextareaChange}
+                                          rows="10">
+                                </textarea>
+                                <textarea className="form-control col-xl-4"
+                                          id="third_story"
+                                          onChange={this.onTextareaChange}
+                                          rows="10">
+                                </textarea>
+                            </div>
+
                             <br/>
-                            <h5>Note: you should use english</h5>
                             <br/>
-                            <textarea rows={5} cols={65} onChange={this.onTextareaChange}></textarea>
+                            <div className="row">
+                                <h4 className="col-xl-12">Masked Language Model Output With Default BERT</h4>
+                                <label className="form-text col-xl-4">First story</label>
+                                <label className="form-text col-xl-4">Second story</label>
+                                <label className="form-text col-xl-4">Third story</label>
+
+                                {/*<label>Large textarea</label>*/}
+                                {/*<label>Large textarea</label>*/}
+                            </div>
+
+
+                            <div className="row" >
+                                <textarea className="form-control col-xl-4"
+                                          id="exampleFormControlTextarea1"
+                                          rows="10" value={this.state.basic[0]}>
+
+                                </textarea>
+                                <textarea className="form-control col-xl-4"
+                                          id="exampleFormControlTextarea1"
+                                          rows="10" value={this.state.basic[1]}>
+
+                                </textarea>
+                                <textarea className="form-control col-xl-4"
+                                          id="exampleFormControlTextarea1"
+                                          rows="10" value={this.state.basic[2]}>
+
+                                </textarea>
+                            </div>
+
                             <br/>
-                            <button type="submit">Classify</button>
+                            <br/>
+                            <div className="row">
+                                <h4 className="col-xl-12">Masked Language Model Output With Trained BERT</h4>
+                                <label className="form-text col-xl-4">First story</label>
+                                <label className="form-text col-xl-4">Second story</label>
+                                <label className="form-text col-xl-4">Third story</label>
+                            </div>
+
+
+                            <div className="row" >
+                                <textarea className="form-control col-xl-4"
+                                          id="exampleFormControlTextarea1"
+                                          rows="10" value={this.state.trained[0]}>
+
+                                </textarea>
+                                <textarea className="form-control col-xl-4"
+                                          id="exampleFormControlTextarea1"
+                                          rows="10" value={this.state.trained[1]}>
+
+                                </textarea>
+                                <textarea className="form-control col-xl-4"
+                                          id="exampleFormControlTextarea1"
+                                          rows="10"
+                                value={this.state.trained[2]}>
+                                </textarea>
+                            </div>
+
+                            <br/>
+                            <br/>
+                            <div className="row">
+                                <h4 className="col-xl-12">Story generated based on First Story with Masked
+                                    LM and NextSentence Prediction</h4>
+                                <label className="form-text col-xl-12">Generated Story</label>
+
+                                {/*<label>Large textarea</label>*/}
+                                {/*<label>Large textarea</label>*/}
+                            </div>
+                            <div className="row m-4" >
+                                <textarea className="form-control col-xl-12"
+                                          id="exampleFormControlTextarea1"
+                                          rows="5"
+                                            value={this.state.story}>
+                                    {this.state.story}
+                                </textarea>
+                            </div>
+
+                            <br/>
+                            <button type="submit">Generate</button>
                         </form>
                         <br/>
-                        <p>Note: reviews that have similar good/bad probabilities might be neutral</p>
-                        <h5>Your review is good with probability: {this.state.prob}</h5>
-                        <h5>Your review is bad with probability: {1 - parseFloat(this.state.prob)}</h5>
                     </div>
-                    :
-                    null
-                }
 
             </div>
         )

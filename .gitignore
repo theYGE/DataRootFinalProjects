@@ -3,3 +3,6 @@
 *.zip
 
 server/lib/
+
+server/trained_model/
+server/basic_model/
