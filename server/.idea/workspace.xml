@@ -1,43 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ba57ed37-6ef6-48f0-8cfc-93d8255cecf7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/basic_model.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/finetuned/added_tokens.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/finetuned/config.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/finetuned/pytorch_model.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/finetuned/special_tokens_map.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/finetuned/vocab.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/inference_MaskedLM.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/inference_NextSentence.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/trained_model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../client/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/build/asset-manifest.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/build/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/build/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/build/manifest.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/build/precache-manifest.f03647dcf9a5830a24464f26acb531d0.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/build/service-worker.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/build/static/css/2.22a7d4ef.chunk.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/build/static/css/2.22a7d4ef.chunk.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/build/static/css/main.34de6062.chunk.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/build/static/css/main.34de6062.chunk.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/build/static/js/2.933cde39.chunk.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/build/static/js/2.933cde39.chunk.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/build/static/js/main.c458feb8.chunk.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/build/static/js/main.c458feb8.chunk.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/build/static/js/runtime~main.a8a9905a.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/build/static/js/runtime~main.a8a9905a.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application.py" beforeDir="false" afterPath="$PROJECT_DIR$/application.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mean.npy" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/scale.npy" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/stop_words.pickle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tokenizer.pickle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/var.npy" beforeDir="false" />
-    </list>
+    <list default="true" id="ba57ed37-6ef6-48f0-8cfc-93d8255cecf7" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
