@@ -46,7 +46,7 @@ termcolor==1.1.0
 tokenize-uk==0.2.0
 torch==1.2.0
 tqdm==4.33.0
-urllib3==1.25.3
+urllib3==1.25.8
 Werkzeug==0.15.5
 wget==3.2
 wrapt==1.11.2
